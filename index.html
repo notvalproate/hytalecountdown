@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hytale Countdown | Unofficial</title>
+
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="description" content="An unofficial countdown to Hytale's release date announcement and early access release!" />
+    <meta name="keywords" content="hytale, hypixel, hypixel studios, game, minecraft, early acess, release date, announcement, simon, simon hypixel, block game, riot games, saved" />
+    <meta name="robots" content="index" />
+    <link rel="author" href="https://x.com/notvalproate" />
+
+    <!-- Social media share image (Open Graph & Twitter) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hytale Countdown | Unofficial" />
+    <meta property="og:url" content="https://hytalecountdown.com/" />
+    <meta property="og:description" content="An unofficial countdown to Hytale's release date announcement and early access release!" />
+    <meta property="og:site_name" content="Hytale Countdown | Unofficial" />
+    <meta property="og:image" content="thumbnail.jpg" />
+    <meta property="og:image:width" content="1019" />
+    <meta property="og:image:height" content="483" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hytale Countdown | Unofficial" />
+    <meta name="twitter:description" content="An unofficial countdown to Hytale's release date announcement and early access release!" />
+    <meta name="twitter:image" content="thumbnail.jpg" />
+
+    <!-- Links -->
+    <link rel="icon" type="image/x-icon" href="https://hytale.com/favicon.ico">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Penumbra';
+            src: url('Penumbra Serif Std Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html {
+            background-color: rgb(15, 20, 40);
+        }
+
+        body { 
+            margin: 0;
+            padding: 0;
+            font-family: 'Penumbra', sans-serif;
+            background-image: url(bg.webp);
+            background-size: cover;
+            background-position-x: right;
+        }
+
+        .main {
+            width: 100vw;
+            min-height: 100dvh;
+            position: relative;
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 20, 40, 0.5),
+                rgb(15, 20, 40)
+            );
+        }
+
+        .countdown-outer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            width: 60%;
+            height: 100dvh;
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 4rem;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 1.5rem;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .logo {
+            width: 25vw;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0;
+            font-size: 1.25rem;
+            background: linear-gradient(#e8fdff,#b9f9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .countdown-wrapper {
+            flex: 1;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .end-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(70%);
+            opacity: 0%;
+            transition: 400ms;
+        }
+
+        .announced {
+            margin-top: 1rem;
+            font-size: 3rem;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: 0.1rem;
+            background: linear-gradient(#ffe98d, #e19f27);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 3px solid transparent;
+        }
+
+        .link {
+            font-size: 1.15rem;
+            margin-top: 1rem;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: rgb(143, 157, 158);
+            transition: 250ms;
+        }
+
+        .link:hover {
+            color: rgb(178, 210, 212);
+        }
+
+        #countdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #countdown-inner {
+            display: flex;
+            align-items: center;
+            column-gap: 1rem;
+        }
+
+        .final-date {
+            font-size: 1.5rem;
+            background: linear-gradient(#ffe98d, #e19f27);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .unit {
+            display: flex;
+            align-items: flex-end;
+            background: linear-gradient(#ffe98d, #e19f27);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .number {
+            font-size: 7rem;
+            width: 4.5rem;
+            text-align: center;
+        }
+        
+        .unit-symbol {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            text-align: center;
+            color: #6b7d80;
+            row-gap: 0.5rem;
+        }
+
+        .switch-button {
+            padding: 2px;
+            background-color: #816632;
+            border-radius: 0.3rem;  
+        }
+
+        .button-inner {
+            font-family: 'Penumbra', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.15rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;  
+            border: none;
+            border:rgb(15, 20, 40) solid 2px;
+            color: #ccd9e0;
+            background: linear-gradient(to bottom, #3c91c5, #225b8b);
+            transition: 250ms;
+        }
+
+        .button-inner:hover {
+            cursor: pointer;
+            color: #9daab1;
+        }
+
+        .button-inner:active {
+            color: #7a858b;
+            background: linear-gradient(to bottom, #2f729c, #194468);
+        }
+
+        .footer-bottom {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: column;
+            text-align: center;
+            color: #6b7d80;
+            row-gap: 0.5rem;
+        }
+
+        .footer-link {
+            color: #7e9396;
+            transition: 250ms;
+            font-size: 1.1rem;
+        }
+
+        .footer-link:hover {
+            color: #9cbfc5;
+        }
+
+        @media (max-width: 991px) {
+            .logo {
+                width: 80vw;
+            }
+
+            .subtitle {
+                font-size: 3rem;
+            }
+
+            .countdown-outer {
+                width: 100%;
+            }
+
+            .announced {
+                font-size: 5rem;
+            }
+
+            .link {
+                margin-top: 5rem;
+                font-size: 3rem;
+            }
+
+            .number {
+                font-size: 9rem;
+                width: 5.8rem;
+                text-align: center;
+            }
+            
+            .unit-symbol {
+                font-size: 2rem;
+                margin-bottom: 1.7rem;
+            }
+
+            .final-date {
+                font-size: 3rem;
+            }
+
+            .footer {
+                font-size: 2rem;
+            }
+
+            .footer-link {
+                font-size: 2rem;
+            }
+
+            .switch-button {
+                padding: 4px;
+                background-color: #816632;
+                border-radius: 1rem;
+            }
+
+            .button-inner {
+                font-family: 'Penumbra', sans-serif;
+                font-size: 3rem;
+                font-weight: 900;
+                letter-spacing: 0.15rem;
+                padding: 1rem 1rem;
+                border-radius: 1rem;
+                border: none;
+                border:rgb(15, 20, 40) solid 4px;
+            }
+        }
+
+        .fade-out {
+            transform: scale(70%);
+            opacity: 0%;
+            transition: 400ms;
+        }
+
+        .fade-in {
+            transform: scale(100%);
+            opacity: 100%; 
+            transition: 400ms;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+        <div class="countdown-outer">
+            <div class="header">
+                <img src="logo.webp" alt="hytale" class="logo">
+                <h1 class="subtitle" id="subtitle">Pre-Orders Go Live In</h1>
+            </div>
+            <div class="countdown-wrapper">
+                <div id="countdown">
+                    <div id="countdown-inner">
+                        <div class="unit">
+                            <span class="number" id="day">0</span>
+                            <span class="number" id="day2">0</span>
+                            <span class="unit-symbol">d</span>
+                        </div>
+                        <div class="unit">
+                            <span class="number" id="hour">0</span>
+                            <span class="number" id="hour2">0</span>
+                            <span class="unit-symbol">h</span>
+                        </div>
+                        <div class="unit">
+                            <span class="number" id="minute">0</span>
+                            <span class="number" id="minute2">0</span>
+                            <span class="unit-symbol">m</span>
+                        </div>
+                        <div class="unit">
+                            <span class="number" id="second">0</span>
+                            <span class="number" id="second2">0</span>
+                            <span class="unit-symbol">s</span>
+                        </div>
+                    </div>
+                    <span class="final-date" id="final-date">13th December 2025 (EST)</span>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="switch-button">
+                    <button class="button-inner" id="switch-button-content" onclick="switchTimer()">
+                        Switch To Release Countdown
+                    </button> 
+                </div>
+                <div class="footer-bottom">
+                    <span class="footer-text">Note: This website is not officially affiliated with Hypixel Studios or Hytale</span>
+                    <a href="https://x.com/notvalproate" class="footer-link">Made By @notvalproate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let playingConfetti = false;
+
+        function playConfetti() {
+            if(playingConfetti) {
+                return;
+            }
+
+            playingConfetti = true;
+            const duration = 15 * 1000,
+            animationEnd = Date.now() + duration,
+            defaults = { 
+                startVelocity: 30, 
+                spread: 360, 
+                ticks: 60, 
+                zIndex: 0,
+                scalar: 3,
+                shapes: ["image"],
+                shapeOptions: {
+                    image: [
+                        {
+                            src: "kweebec.webp",
+                            width: 32,
+                            height: 32,
+                        },
+                        {
+                            src: "kweebec2.webp",
+                            width: 32,
+                            height: 32,
+                        },
+                        {
+                            src: "kweebec3.webp",
+                            width: 32,
+                            height: 32,
+                        }
+                    ],
+                }
+            };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    playingConfetti = false;
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 15 * (timeLeft / duration);
+
+                confetti(
+                    Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    })
+                );
+                confetti(
+                    Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    })
+                );
+            }, 250);
+        }
+
+        const subtitleElement = document.getElementById("subtitle");
+        const buttonElement = document.getElementById("switch-button-content");
+        const dateElement = document.getElementById("final-date");
+
+        // Once pre-orders are live, change poCompleted = true and release = true and re-deploy :)
+
+        const poSubtitle = "Pre-Orders Go Live In";
+        const poDate = Date.UTC(2025, 11, 13, 15, 0, 0);
+        const poDateText = "13th December 2025 (EST)";
+        const poButtonText = "Switch To Release Countdown";
+        const poAnnouncement = "Hytale's Pre-Orders<br>are now Live!"
+        let poCompleted = false;
+
+        const rlSubtitle = "EA Release Goes Live In";
+        const rlDate = Date.UTC(2026, 0, 13, 15, 0, 0);
+        const rlDateText = "13th January 2026 (EST)";
+        const rlButtonText = "Switch To Pre-Order Countdown";
+        const rlAnnouncement = "Hytale's Early Access<br>has been released!"
+        let rlCompleted = false;
+
+        let release = false;
+        let targetDate = poDate;
+
+        let day = document.getElementById("day");
+        let hour = document.getElementById("hour");
+        let minute = document.getElementById("minute");
+        let second = document.getElementById("second");
+        let day2 = document.getElementById("day2");
+        let hour2 = document.getElementById("hour2");
+        let minute2 = document.getElementById("minute2");
+        let second2 = document.getElementById("second2");
+
+        const msday = 1000 * 60 * 60 * 24;
+        const mshour = 1000 * 60 * 60;
+        const msmin = 1000 * 60;
+
+        let completed = false;
+        let switched = false;
+
+        function setupData(isRelease) {
+            let dateText = poDateText;
+
+            if(isRelease) {
+                dateText = rlDateText;
+            }
+
+            document.getElementById("countdown").innerHTML = `
+                <div id="countdown-inner">
+                    <div class="unit">
+                        <span class="number" id="day">0</span>
+                        <span class="number" id="day2">0</span>
+                        <span class="unit-symbol">d</span>
+                    </div>
+                    <div class="unit">
+                        <span class="number" id="hour">0</span>
+                        <span class="number" id="hour2">0</span>
+                        <span class="unit-symbol">h</span>
+                    </div>
+                    <div class="unit">
+                        <span class="number" id="minute">0</span>
+                        <span class="number" id="minute2">0</span>
+                        <span class="unit-symbol">m</span>
+                    </div>
+                    <div class="unit">
+                        <span class="number" id="second">0</span>
+                        <span class="number" id="second2">0</span>
+                        <span class="unit-symbol">s</span>
+                    </div>
+                </div>
+                <span class="final-date" id="final-date">${dateText}</span>
+            `;
+
+            day = document.getElementById("day");
+            hour = document.getElementById("hour");
+            minute = document.getElementById("minute");
+            second = document.getElementById("second");
+            day2 = document.getElementById("day2");
+            hour2 = document.getElementById("hour2");
+            minute2 = document.getElementById("minute2");
+            second2 = document.getElementById("second2");
+            
+            if(release) {
+                targetDate = rlDate;
+                subtitleElement.innerHTML = rlSubtitle;
+                buttonElement.innerHTML = rlButtonText;
+                dateElement.innerHTML = rlDateText;
+            } else {
+                targetDate = poDate;
+                subtitleElement.innerHTML = poSubtitle;
+                buttonElement.innerHTML = poButtonText;
+                dateElement.innerHTML = poDateText;
+            }
+
+            updateCountdown();
+        }
+
+        function switchTimer() {
+            switched = true;
+            release = !release;
+            setupData(release);
+        }
+
+        function playAnim(doConfetti) {
+            document.getElementById("countdown-inner").classList.add("fade-out");
+            document.getElementById("final-date").classList.add("fade-out");
+
+            setTimeout(() => {
+                let announcementText = poAnnouncement;
+                if(release) {
+                    announcementText = rlAnnouncement;
+                }
+
+                document.getElementById("countdown").innerHTML = `
+                <div class="end-wrapper" id="end">
+                    <span class="announced">${announcementText}</span>
+                    <a href="https://x.com/Hytale" class="link" target="_blank">Click here to check Hytale's Twitter</a>
+                </div>
+                `;
+                setTimeout(() => {
+                    document.getElementById("end").classList.add("fade-in");
+                    if (doConfetti) {
+                        playConfetti();
+                    }
+                }, 300);
+            }, 250);
+        }
+
+        function updateCountdown() {
+            const endDate = new Date(targetDate);
+            const now = new Date();
+            const diff = endDate - now;
+
+            if (diff <= 0) {
+                let justCompleted = false;
+
+                if(release) {
+                    justCompleted = !rlCompleted;
+                    rlCompleted = true;
+                } else {
+                    justCompleted = !poCompleted;
+                    poCompleted = true;
+                }
+
+                if (switched) {
+                    switched = false;
+                    playAnim(false);
+                }
+
+                if (!justCompleted) {
+                    return;
+                }
+
+                playAnim(true);
+            } else {
+                const days = Math.floor(diff / msday);
+                const hours = Math.floor((diff % msday) / mshour);
+                const minutes = Math.floor((diff % mshour) / msmin);
+                const seconds = Math.floor((diff % msmin) / 1000);
+
+                day.textContent = Math.floor(days / 10);
+                hour.textContent = Math.floor(hours / 10);
+                minute.textContent = Math.floor(minutes / 10);
+                second.textContent = Math.floor(seconds / 10);
+                
+                day2.textContent = days % 10;
+                hour2.textContent = hours % 10;
+                minute2.textContent = minutes % 10;
+                second2.textContent = seconds % 10;
+            }
+        }
+
+        setupData(release);
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+  </body>
+</html>
