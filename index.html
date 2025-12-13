@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Hytale Countdown - Early Access & Pre-Order - Unofficial</title>
+    <title>Hytale Countdown - Early Access - Unofficial</title>
 
     <!-- Meta Tags -->
     <meta charset="UTF-8" />
@@ -194,6 +194,12 @@
             border-radius: 0.3rem;  
         }
 
+        .faded-button {
+            transform: scale(70%);
+            opacity: 0%;
+            transition: 400ms;
+        }
+
         .button-inner {
             font-family: 'Penumbra', sans-serif;
             font-size: 1.25rem;
@@ -300,7 +306,7 @@
             
             .unit-symbol {
                 font-size: 2rem;
-                margin-bottom: 1.7rem;
+                margin-bottom: 1.9rem;
             }
 
             .final-date {
@@ -368,7 +374,7 @@
         <div class="countdown-outer">
             <div class="header">
                 <img src="logo.webp" alt="hytale" class="logo">
-                <h1 class="subtitle" id="subtitle">Pre-Orders Go Live In</h1>
+                <h1 class="subtitle" id="subtitle">EA Release Goes Live In</h1>
             </div>
             <div class="countdown-wrapper">
                 <div id="countdown">
@@ -394,15 +400,17 @@
                             <span class="unit-symbol">s</span>
                         </div>
                     </div>
-                    <span class="final-date" id="final-date">13th December 2025 (10AM EST)</span>
+                    <span class="final-date" id="final-date">13th January 2026 (10AM EST)</span>
                 </div>
             </div>
-            <div class="footer">
-                <div class="switch-button">
-                    <button class="button-inner" id="switch-button-content" onclick="switchTimer()">
-                        Switch To Release Countdown
-                    </button> 
-                </div>
+            <div class="footer" id="footer">
+                <a href="https://hytale.com" target="_blank">
+                    <div class="switch-button" id="button">
+                        <button class="button-inner" id="switch-button-content">
+                            Pre-Orders Are Live Here!
+                        </button> 
+                    </div>
+                </a>
                 <div class="footer-bottom">
                     <div class="socials">
                         <span class="socials-title">Hytale's Official Socials</span>
@@ -499,28 +507,7 @@
             }, 250);
         }
 
-        const subtitleElement = document.getElementById("subtitle");
-        const buttonElement = document.getElementById("switch-button-content");
-        const dateElement = document.getElementById("final-date");
-
-        // Once pre-orders are live, change poCompleted = true and release = true and re-deploy :)
-
-        const poSubtitle = "Pre-Orders Go Live In";
-        const poDate = Date.UTC(2025, 11, 13, 15, 0, 0);
-        const poDateText = "13th December 2025 (10AM EST)";
-        const poButtonText = "Switch To Release Countdown";
-        const poAnnouncement = "Hytale's Pre-Orders<br>are now Live!"
-        let poCompleted = false;
-
-        const rlSubtitle = "EA Release Goes Live In";
         const rlDate = Date.UTC(2026, 0, 13, 15, 0, 0);
-        const rlDateText = "13th January 2026 (10AM EST)";
-        const rlButtonText = "Switch To Pre-Order Countdown";
-        const rlAnnouncement = "Hytale's Early Access<br>has been released!"
-        let rlCompleted = false;
-
-        let release = false;
-        let targetDate = poDate;
 
         let day = document.getElementById("day");
         let hour = document.getElementById("hour");
@@ -535,123 +522,65 @@
         const mshour = 1000 * 60 * 60;
         const msmin = 1000 * 60;
 
-        let completed = false;
-        let switched = false;
-
-        function setupData(isRelease) {
-            let dateText = poDateText;
-
-            if(isRelease) {
-                dateText = rlDateText;
-            }
-
-            document.getElementById("countdown").innerHTML = `
-                <div id="countdown-inner">
-                    <div class="unit">
-                        <span class="number" id="day">0</span>
-                        <span class="number" id="day2">0</span>
-                        <span class="unit-symbol">d</span>
-                    </div>
-                    <div class="unit">
-                        <span class="number" id="hour">0</span>
-                        <span class="number" id="hour2">0</span>
-                        <span class="unit-symbol">h</span>
-                    </div>
-                    <div class="unit">
-                        <span class="number" id="minute">0</span>
-                        <span class="number" id="minute2">0</span>
-                        <span class="unit-symbol">m</span>
-                    </div>
-                    <div class="unit">
-                        <span class="number" id="second">0</span>
-                        <span class="number" id="second2">0</span>
-                        <span class="unit-symbol">s</span>
-                    </div>
-                </div>
-                <span class="final-date" id="final-date">${dateText}</span>
-            `;
-
-            day = document.getElementById("day");
-            hour = document.getElementById("hour");
-            minute = document.getElementById("minute");
-            second = document.getElementById("second");
-            day2 = document.getElementById("day2");
-            hour2 = document.getElementById("hour2");
-            minute2 = document.getElementById("minute2");
-            second2 = document.getElementById("second2");
-            
-            if(release) {
-                targetDate = rlDate;
-                subtitleElement.innerHTML = rlSubtitle;
-                buttonElement.innerHTML = rlButtonText;
-                dateElement.innerHTML = rlDateText;
-            } else {
-                targetDate = poDate;
-                subtitleElement.innerHTML = poSubtitle;
-                buttonElement.innerHTML = poButtonText;
-                dateElement.innerHTML = poDateText;
-            }
-
-            updateCountdown();
-        }
-
-        function switchTimer() {
-            switched = true;
-            release = !release;
-            setupData(release);
-        }
-
-        function playAnim(doConfetti) {
+        function playAnim() {
             document.getElementById("countdown-inner").classList.add("fade-out");
             document.getElementById("final-date").classList.add("fade-out");
+            document.getElementById("button").classList.add("fade-out");
 
             setTimeout(() => {
-                let announcementText = poAnnouncement;
-                if(release) {
-                    announcementText = rlAnnouncement;
-                }
-
                 document.getElementById("countdown").innerHTML = `
                 <div class="end-wrapper" id="end">
-                    <span class="announced">${announcementText}</span>
-                    <a href="https://store.hytale.com/" class="link" target="_blank">Click Here To Pre-Order The Game!</a>
+                    <span class="announced">Hytale's Early Access<br>has been released!</span>
+                    <a href="https://x.com/Hytale" class="link" target="_blank">Click Here To Check Hytale's Twitter</a>
                 </div>
                 `;
+                document.getElementById("footer").innerHTML = `
+                <a href="https://store.hytale.com/" target="_blank">
+                    <div class="switch-button faded-button" id="button">
+                        <button class="button-inner" id="switch-button-content">
+                            Get The Game Here!
+                        </button> 
+                    </div>
+                </a>
+                <div class="footer-bottom">
+                    <div class="socials">
+                        <span class="socials-title">Hytale's Official Socials</span>
+                        <ul class="socials-list">
+                            <a href="https://x.com/Hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/HytaleGame/" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                            <a href="https://www.youtube.com/Hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <a href="https://discord.gg/hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-discord"></i>
+                            </a>
+                        </ul>
+                    </div>
+                    <span class="footer-text">This website is not officially affiliated with Hypixel Studios or Hytale</span>
+                    <a href="https://x.com/notvalproate" class="footer-link">Made By @notvalproate</a>
+                </div>
+                `
                 setTimeout(() => {
                     document.getElementById("end").classList.add("fade-in");
-                    if (doConfetti) {
-                        playConfetti();
-                    }
+                    document.getElementById("button").classList.add("fade-in");
+                    playConfetti();
                 }, 300);
             }, 250);
         }
 
         function updateCountdown() {
-            const endDate = new Date(targetDate);
             const now = new Date();
-            const diff = endDate - now;
+            const diff = rlDate - now;
 
             if (diff <= 0) {
-                let justCompleted = false;
-
-                if(release) {
-                    justCompleted = !rlCompleted;
-                    rlCompleted = true;
-                } else {
-                    justCompleted = !poCompleted;
-                    poCompleted = true;
-                }
-
-                if (switched) {
-                    switched = false;
-                    playAnim(false);
-                }
-
-                if (!justCompleted) {
-                    return;
-                }
-
-                playAnim(true);
+                playAnim();
             } else {
                 const days = Math.floor(diff / msday);
                 const hours = Math.floor((diff % msday) / mshour);
@@ -670,7 +599,6 @@
             }
         }
 
-        setupData(release);
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
