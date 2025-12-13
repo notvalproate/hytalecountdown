@@ -26,6 +26,7 @@
 
     <!-- Links -->
     <link rel="icon" type="image/x-icon" href="https://hytale.com/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
@@ -237,6 +238,37 @@
         .footer-link:hover {
             color: #9cbfc5;
         }
+        
+        .socials {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .socials-title {
+            font-size: 1.2rem;
+        }
+
+        .socials-list {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            column-gap: 1.5rem;
+        }
+
+        .social-icon {
+            text-decoration: none;
+            color: #7e9396;
+            transition: 200ms;
+            font-size: 1.5rem;
+        }
+
+        .social-icon:hover {
+            color: #9cbfc5;
+        }
 
         @media (max-width: 991px) {
             .logo {
@@ -299,6 +331,23 @@
                 border: none;
                 border:rgb(15, 20, 40) solid 4px;
             }
+
+            .socials {
+                row-gap: 2rem;
+                padding-bottom: 3rem;
+            }
+
+            .socials-title {
+                font-size: 2rem;
+            }
+
+            .social-icon {
+                font-size: 3.5rem;
+            }
+
+            .socials-list {
+                column-gap: 4rem;
+            }
         }
 
         .fade-out {
@@ -355,8 +404,28 @@
                     </button> 
                 </div>
                 <div class="footer-bottom">
-                    <span class="footer-text">Note: This website is not officially affiliated with Hypixel Studios or Hytale</span>
-                    <a href="https://x.com/notvalproate" class="footer-link">Made By @notvalproate</a>
+                    <div class="socials">
+                        <span class="socials-title">Hytale's Official Socials</span>
+                        <ul class="socials-list">
+                            <a href="https://x.com/Hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/HytaleGame/" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                            <a href="https://www.youtube.com/Hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <a href="https://discord.gg/hytale" target="_blank" class="social-icon">
+                                <i class="fa-brands fa-discord"></i>
+                            </a>
+                        </ul>
+                    </div>
+                    <span class="footer-text">This website is not officially affiliated with Hypixel Studios or Hytale</span>
+                    <a href="https://x.com/notvalproate" class="footer-link">Made By @notvalproate <i class="fa-solid fa-heart"></i></a>
                 </div>
             </div>
         </div>
@@ -545,7 +614,7 @@
                 document.getElementById("countdown").innerHTML = `
                 <div class="end-wrapper" id="end">
                     <span class="announced">${announcementText}</span>
-                    <a href="https://x.com/Hytale" class="link" target="_blank">Click here to check Hytale's Twitter</a>
+                    <a href="https://accounts.hytale.com/profiles" class="link" target="_blank">Click Here To Pre-Order The Game!</a>
                 </div>
                 `;
                 setTimeout(() => {
